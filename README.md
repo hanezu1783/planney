@@ -1,24 +1,69 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## userテーブル
 
-Things you may want to cover:
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| nickname           | string  | null: false               |
+| email              | string  | null: false, unique: true |
+| encrypted_password | string  | null: false               |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :transactions
+- has_many :calendars
+- has_many :events
 
-* Configuration
+## transactionテーブル
 
-* Database creation
+| Column              | Type       | Options                        |
+| --------------------| ---------- | ------------------------------ |
+| user                | references | null: false, foreign_key: true |
+| title               | string     | null: false                    |
+| price               | integer    | null: false                    |
+| date                | date       | null: false                    |
+| transaction_type    | integer    | null: false                    |
+| category_id         | integer    | null: false                    |
+| pay_type_id         | integer    | null: false                    |
+| memo                | text       |                                |
 
-* Database initialization
 
-* How to run the test suite
+### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :user
+- has_many :event_transactions
+- has_many :events, through: :event_transactions
 
-* Deployment instructions
+## calendarテーブル
 
-* ...
+
+## eventテーブル
+
+| Column              | Type       | Options                        |
+| --------------------| ---------- | ------------------------------ |
+| user                | references | null: false, foreign_key: true |
+| event_title         | string     | null: false                    |
+| event_category_id   | integer    | null: false                    |
+| start_time          | datetime   |                                |
+| end_time            | datetime   |                                |
+| is_all_day          | boolean    |                                |
+| description         | text       |                                |
+
+### Association
+
+- belongs_to :user
+- has_many :event_transactions
+- has_many :transactions, through: :event_transactions
+
+## event_transactionsテーブル
+
+| Column              | Type       | Options                        |
+| --------------------| ---------- | ------------------------------ |
+| user                | references | null: false, foreign_key: true |
+| event_id            | integer    | null: false                    |
+| transaction_id      | integer    | null: false                    |
+
+### Association
+
+- belongs_to :event
+- belongs_to :transaction
