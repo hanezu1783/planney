@@ -2,6 +2,7 @@
   <div class="left-content">
     <div class="section-container">
       <h2 class="section-title">家計簿</h2>
+      <%= link_to '家計簿を記録する', new_transaction_path, class: 'btn-record' %>
       <div class="content-box">
         <p>ここに最近の取引履歴や収支サマリーを表示します。</p>
         <%# 今後、@transactions.each do |transaction| ... のように展開 %>

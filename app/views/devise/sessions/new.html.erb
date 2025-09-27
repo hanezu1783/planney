@@ -1,0 +1,32 @@
+<h1>ログイン</h1>
+
+<%# フォームのスタイルを適用するために、form_withではなくform_forを使用します %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "login-form" }) do |f| %>
+
+  <%# Deviseのエラーメッセージ表示 %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :email, 'メールアドレス' %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, 'パスワード' %><br />
+    <%= f.password_field :password, autocomplete: "current-password" %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="field remember-me">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me, 'ログイン情報を記憶する' %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "ログイン" %>
+  </div>
+<% end %>
+
+<%# 新規登録やパスワード忘れのリンク %>
+<%= render "devise/shared/links" %>

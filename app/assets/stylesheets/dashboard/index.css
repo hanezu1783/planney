@@ -62,3 +62,21 @@
   border-radius: 8px;
   padding: 14px;
 }
+
+/* 記録ボタン */
+.btn-record {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-bottom: 15px; /* 下のコンテンツとの余白 */
+  background-color: #e9b5b8; /* 家計簿セクションのボーダー色と合わせる */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.btn-record:hover {
+  background-color: #e2a7aa; /* content-boxのボーダー色と合わせる */
+}

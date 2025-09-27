@@ -12,8 +12,17 @@
 
 ActiveRecord::Schema[7.1].define(version: 2025_09_08_194506) do
   create_table "transactions", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title", null: false
+    t.integer "price", null: false
+    t.date "date", null: false
+    t.integer "transaction_type"
+    t.integer "category_id", null: false
+    t.integer "pay_type"
+    t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
@@ -29,4 +38,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_08_194506) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "transactions", "users"
 end

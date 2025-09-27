@@ -1,0 +1,87 @@
+<h1>家計簿の入力</h1>
+
+<%= form_with(model: @transaction, local: true) do |form| %>
+  <%# エラーメッセージの表示 %>
+  <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+      <ul>
+        <% @transaction.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :transaction_type, '区分' %>
+    <div class="radio-buttons-container">
+      <%= form.radio_button :transaction_type, 'expense', checked: true, id: 'transaction_type_expense' %>
+      <%= form.label :transaction_type_expense, '支出', class: 'radio-label' %>
+      <%= form.radio_button :transaction_type, 'income', id: 'transaction_type_income' %>
+      <%= form.label :transaction_type_income, '収入', class: 'radio-label' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :date, '日付' %>
+    <%= form.date_field :date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price, '金額' %>
+    <%= form.number_field :price, placeholder: '例: 1000' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :memo, 'メモ' %>
+    <%= form.text_field :memo, placeholder: '例: ランチ代' %>
+  </div>
+
+  <div id="expense_fields">
+    <%#
+      もしCategoryモデルがあり、@categoriesにカテゴリ一覧がセットされている場合の例です。
+      不要な場合や、実装が異なる場合はこの部分を修正・削除してください。
+    %>
+    <% if @categories.present? %>
+      <div class="field">
+        <%= form.label :category_id, 'カテゴリ' %>
+        <%= form.collection_select :category_id, @categories, :id, :name, { prompt: 'カテゴリを選択' } %>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :pay_type, '支払い方法' %>
+      <div class="radio-buttons-container">
+        <%= form.radio_button :pay_type, 'cash', checked: true %>
+        <%= form.label :pay_type_cash, '現金', class: 'radio-label' %>
+        <%= form.radio_button :pay_type, 'credit_card' %>
+        <%= form.label :pay_type_credit_card, 'クレジットカード', class: 'radio-label' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit '登録する' %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const expenseFields = document.getElementById('expense_fields');
+    const typeRadios = document.querySelectorAll('input[name="transaction[transaction_type]"]');
+
+    function toggleExpenseFields() {
+      const selectedKind = document.querySelector('input[name="transaction[transaction_type]"]:checked').value;
+      expenseFields.style.display = selectedKind === 'expense' ? 'block' : 'none';
+    }
+
+    // 初期表示
+    toggleExpenseFields();
+
+    // ラジオボタンが変更されたときに実行
+    typeRadios.forEach(radio => radio.addEventListener('change', toggleExpenseFields));
+  });
+</script>
+
+<%= link_to '一覧に戻る', transactions_path %>
