@@ -1,0 +1,64 @@
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: "Noto Sans JP", "Hiragino Sans", sans-serif;
+  color: #333;
+}
+
+/* 左右の領域 */
+.left-content {
+  flex: 0 0 60%;   /* 家計簿は幅60%固定 */
+}
+
+.right-content {
+  flex: 1;         /* スケジュールは残り幅を自動調整 */
+}
+
+/* 共通セクション */
+.section-container {
+  background: #fff;
+  border-radius: 12px; /* 少し丸める */
+  padding: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06); /* 控えめ */
+  transition: box-shadow 0.2s ease;
+}
+
+.section-container:hover {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* マウスオーバーで軽く */
+}
+
+.section-title {
+  font-size: 1.2rem;
+  margin-bottom: 14px;
+  font-weight: 600;
+  color: #222;
+}
+
+/* 家計簿専用（落ち着いた赤系） */
+.left-content .section-container {
+  border: 2px solid #e9b5b8; /* サーモン寄り */
+}
+
+.left-content .content-box {
+  background: #fdf7f7; /* 薄いサーモン系 */
+  border: 1px solid #e2a7aa;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+/* スケジュール専用（落ち着いた青系） */
+.right-content .section-container {
+  border: 2px solid #b7cde9; /* ペールブルー */
+}
+
+.right-content .content-box {
+  background: #f7faff; /* 薄い青 */
+  border: 1px solid #a1bde0;
+  border-radius: 8px;
+  padding: 14px;
+}

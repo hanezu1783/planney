@@ -34,8 +34,6 @@
 - has_many :event_transactions
 - has_many :events, through: :event_transactions
 
-## calendarテーブル
-
 
 ## eventテーブル
 
@@ -65,5 +63,6 @@
 
 ### Association
 
+- belongs_to :user
 - belongs_to :event
 - belongs_to :transaction
