@@ -4,8 +4,8 @@
     <div class='nav'>
       <ul class='lists-right'>
         <% if user_signed_in? %>
-          <li><%= link_to '家計簿', root_path, class: "nav-link" %></li>
-          <li><%= link_to 'スケジュール', "#", class: "nav-link" %></li>
+          <li><%= link_to '家計簿', transactions_path, class: "nav-link" %></li>
+          <li><%= link_to 'スケジュール', events_path, class: "nav-link" %></li>
           <li><%= link_to "#{current_user.nickname} さん", "#", class: "user-nickname" %></li>
           <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li>
         <% else %>

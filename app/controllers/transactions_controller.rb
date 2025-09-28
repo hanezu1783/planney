@@ -1,8 +1,9 @@
 class TransactionsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_transaction, only: [:show] # :edit, :update, :destroy も今後追加
 
   def index
-    # 今後の実装のために空けておく
+    @transactions = current_user.transactions.order(date: :desc)
   end
 
   def new
@@ -21,11 +22,19 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def show
+    # before_action :set_transaction で @transaction が設定されます
+  end
+
   private
+
+  def set_transaction
+    @transaction = current_user.transactions.find(params[:id])
+  end
 
   def transaction_params
     params.require(:transaction).permit(
-      :transaction_type, :date, :price, :memo, :category_id, :pay_type
+      :transaction_type, :title, :date, :price, :memo, :category_id, :pay_type
     ).merge(user_id: current_user.id)
   end
 end

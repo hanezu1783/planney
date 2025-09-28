@@ -7,4 +7,5 @@ class User < ApplicationRecord
   validates :nickname, presence: true
 
   has_many :transactions
+  has_many :events
 end

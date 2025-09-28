@@ -24,6 +24,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :title, 'タイトル' %>
+    <%= form.text_field :title, placeholder: '例: スーパーでの買い物' %>
+  </div>
+
+  <div class="field">
     <%= form.label :date, '日付' %>
     <%= form.date_field :date %>
   </div>
@@ -31,11 +36,6 @@
   <div class="field">
     <%= form.label :price, '金額' %>
     <%= form.number_field :price, placeholder: '例: 1000' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :memo, 'メモ' %>
-    <%= form.text_field :memo, placeholder: '例: ランチ代' %>
   </div>
 
   <div id="expense_fields">
@@ -58,6 +58,11 @@
         <%= form.radio_button :pay_type, 'credit_card' %>
         <%= form.label :pay_type_credit_card, 'クレジットカード', class: 'radio-label' %>
       </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :memo, 'メモ' %>
+      <%= form.text_field :memo, placeholder: '例: ランチ代' %>
     </div>
   </div>
 

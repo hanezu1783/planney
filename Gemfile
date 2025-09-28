@@ -70,3 +70,4 @@ end
 gem 'pry-rails'
 gem 'devise'
 gem 'active_hash'
+gem 'simple_calendar'

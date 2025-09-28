@@ -1,1 +1,42 @@
+<div class="transaction-index-container">
+  <h1>家計簿一覧</h1>
 
+  <div class="table-actions">
+    <%= link_to '新しく記録する', new_transaction_path, class: 'btn-action' %>
+  </div>
+
+  <% if @transactions.present? %>
+    <div class="table-wrapper">
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>日付</th>
+            <th>タイトル</th>
+            <th>区分</th>
+            <th>カテゴリ</th>
+            <th class="amount">金額</th>
+            <th>支払い方法</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @transactions.each do |transaction| %>
+            <tr class="<%= transaction.transaction_type %>">
+              <td><%= l(transaction.date, format: :short) %></td>
+              <td class="title"><%= link_to transaction.title, transaction_path(transaction) %></td>
+              <td><%= transaction.transaction_type_i18n %></td>
+              <td><%= transaction.category&.name %></td>
+              <td class="amount">
+                <%= number_to_currency(transaction.price, unit: '円', precision: 0, format: "%n%u") %>
+              </td>
+              <td><%= transaction.pay_type_i18n %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p class="no-transactions">まだ取引履歴がありません。最初の記録をしてみましょう！</p>
+  <% end %>
+
+  <%= link_to 'ダッシュボードに戻る', root_path, class: 'link-back' %>
+</div>

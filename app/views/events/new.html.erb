@@ -1,0 +1,87 @@
+<h1>スケジュールの登録</h1>
+
+<%= form_with(model: @event, local: true) do |form| %>
+  <%# エラーメッセージの表示 %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+      <ul>
+        <% @event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :event_title, 'タイトル' %>
+    <%= form.text_field :event_title, placeholder: '例: チームミーティング' %>
+  </div>
+
+  <%# 時間を指定する場合の入力欄 %>
+  <div id="time_fields">
+    <div class="field">
+      <%= form.label :start_at, '開始日時' %>
+      <%= form.datetime_field :start_at, id: 'event_start_at_datetime' %>
+    </div>
+    <div class="field">
+      <%= form.label :end_at, '終了日時' %>
+      <%= form.datetime_field :end_at, id: 'event_end_at_datetime' %>
+    </div>
+  </div>
+
+  <%# 終日を指定する場合の入力欄 %>
+  <div id="date_fields">
+    <div class="field">
+      <%= form.label :start_at_date, '日付' %>
+      <%= form.date_field :start_at, id: 'event_start_at_date' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.check_box :all_day, id: 'all_day_check' %>
+    <%= form.label :all_day, '終日' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description, '詳細' %>
+    <%= form.text_area :description, rows: 4, placeholder: '例: プロジェクトAの進捗確認' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit '登録する' %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const allDayCheckbox = document.getElementById('all_day_check');
+    
+    // 各入力欄とそれを囲むコンテナを取得
+    const timeFields = document.getElementById('time_fields');
+    const dateFields = document.getElementById('date_fields');
+    const startDatetimeInput = document.getElementById('event_start_at_datetime');
+    const endDatetimeInput = document.getElementById('event_end_at_datetime');
+    const startDateInput = document.getElementById('event_start_at_date');
+
+    function toggleTimeInputs() {
+      const isAllDay = allDayCheckbox.checked;
+
+      // 表示/非表示を切り替え
+      timeFields.style.display = isAllDay ? 'none' : 'block';
+      dateFields.style.display = isAllDay ? 'block' : 'none';
+
+      // 入力欄の有効/無効を切り替え
+      startDatetimeInput.disabled = isAllDay;
+      endDatetimeInput.disabled = isAllDay;
+      startDateInput.disabled = !isAllDay;
+    }
+
+    // 初期表示
+    toggleTimeInputs();
+    // チェックボックスが変更されたときに実行
+    allDayCheckbox.addEventListener('change', toggleTimeInputs);
+  });
+</script>
+
+<%= link_to 'ダッシュボードに戻る', root_path %>

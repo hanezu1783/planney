@@ -1,0 +1,46 @@
+<div class="event-index-container">
+  <h1>スケジュール</h1>
+
+  <div class="calendar-container">
+    <%# simple_calendarでカレンダーを表示します %>
+    <%= month_calendar(attribute: :start_at, events: @events) do |date, events| %>
+      <div class="calendar-day-number"><%= date.day %></div>
+
+      <%# その日のイベントを2件まで表示 %>
+      <% events.first(2).each do |event| %>
+        <div class="calendar-event">
+          <%= link_to event.event_title, event_path(event), class: "calendar-event-link" %>
+        </div>
+      <% end %>
+
+      <%# 3件以上ある場合は「...」を表示 %>
+      <% if events.size > 2 %>
+        <div class="calendar-event-more">...</div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <h2>イベント一覧</h2>
+  <div class="table-wrapper">
+    <table class="event-table">
+      <thead>
+        <tr>
+          <th>タイトル</th>
+          <th>開始日時</th>
+          <th>終了日時</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @events.each do |event| %>
+          <tr>
+            <td><%= link_to event.event_title, event_path(event) %></td>
+            <td><%= l(event.start_at, format: :default) %></td>
+            <td><%= l(event.end_at, format: :default) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= link_to 'ダッシュボードに戻る', root_path, class: 'link-back' %>
+</div>

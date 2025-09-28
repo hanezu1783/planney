@@ -80,3 +80,21 @@
 .btn-record:hover {
   background-color: #e2a7aa; /* content-boxのボーダー色と合わせる */
 }
+
+/* スケジュール記録ボタン */
+.btn-schedule {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  background-color: #b7cde9; /* スケジュールセクションのボーダー色と合わせる */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.btn-schedule:hover {
+  background-color: #a1bde0; /* content-boxのボーダー色と合わせる */
+}

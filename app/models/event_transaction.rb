@@ -1,0 +1,2 @@
+class EventTransaction < ApplicationRecord
+end

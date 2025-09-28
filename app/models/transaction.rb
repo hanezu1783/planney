@@ -17,4 +17,13 @@ class Transaction < ApplicationRecord
   with_options if: :transaction_type_expense? do
     validates :pay_type, :category_id, presence: true
   end
+
+  # enumの値を日本語に変換するメソッド
+  def transaction_type_i18n
+    I18n.t("activerecord.attributes.transaction.transaction_types.#{transaction_type}")
+  end
+
+  def pay_type_i18n
+    I18n.t("activerecord.attributes.transaction.pay_types.#{pay_type}") if pay_type.present?
+  end
 end
