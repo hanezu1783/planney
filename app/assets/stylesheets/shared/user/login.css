@@ -1,0 +1,117 @@
+/* ログインページのコンテナ */
+.login-container {
+  margin: 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  padding-top: 80px; /* ヘッダーの高さ分くらい下にずらす */
+  min-height: 100vh;
+  background-color: #f0f2f5;
+}
+
+/* ログインフォームのカード */
+.login-form {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* フォームタイトル */
+.login-form h1 {
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* 各フォームフィールド */
+.login-form .field {
+  margin-bottom: 20px;
+}
+
+/* ラベル */
+.login-form label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+/* 入力欄 */
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-form input[type="email"]:focus,
+.login-form input[type="password"]:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 2px rgba(231,76,60,0.2);
+}
+
+/* ログイン情報を記憶する */
+.login-form .remember-me {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.login-form .remember-me input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* 送信ボタン */
+.login-form .actions input[type="submit"] {
+  width: 100%;
+  background-color: #e74c3c;
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-form .actions input[type="submit"]:hover {
+  background-color: #c0392b;
+}
+
+/* Deviseリンク */
+.login-form + .devise-links {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.login-form + .devise-links a {
+  color: #e74c3c;
+  text-decoration: none;
+  margin: 0 8px;
+}
+
+.login-form + .devise-links a:hover {
+  text-decoration: underline;
+}
+
+/* エラーメッセージ */
+.login-form .error-explanation {
+  background-color: #f9ebea;
+  border: 1px solid #e74c3c;
+  color: #c0392b;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}

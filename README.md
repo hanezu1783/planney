@@ -11,7 +11,6 @@
 ### Association
 
 - has_many :transactions
-- has_many :calendars
 - has_many :events
 
 ## transactionテーブル
@@ -24,7 +23,7 @@
 | date                | date       | null: false                    |
 | transaction_type    | integer    | null: false                    |
 | category_id         | integer    | null: false                    |
-| pay_type_id         | integer    | null: false                    |
+| pay_type            | integer    | null: false                    |
 | memo                | text       |                                |
 
 
@@ -41,10 +40,9 @@
 | --------------------| ---------- | ------------------------------ |
 | user                | references | null: false, foreign_key: true |
 | event_title         | string     | null: false                    |
-| event_category_id   | integer    | null: false                    |
-| start_time          | datetime   |                                |
-| end_time            | datetime   |                                |
-| is_all_day          | boolean    |                                |
+| start_at            | datetime   |                                |
+| end_at              | datetime   |                                |
+| all_day             | boolean    |                                |
 | description         | text       |                                |
 
 ### Association

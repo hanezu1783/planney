@@ -1,9 +1,19 @@
+<%= stylesheet_link_tag "transactions/index", "data-turbo-track": "reload" %>
+
+
 <div class="transaction-index-container">
   <h1>家計簿一覧</h1>
 
   <div class="table-actions">
     <%= link_to '新しく記録する', new_transaction_path, class: 'btn-action' %>
   </div>
+
+  <% if @expense_by_category.present? %>
+    <div class="chart-container" style="margin-bottom: 2rem;">
+      <h2>支出の割合</h2>
+      <%= pie_chart @expense_by_category, donut: true, legend: "bottom", colors: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40"] %>
+    </div>
+  <% end %>
 
   <% if @transactions.present? %>
     <div class="table-wrapper">

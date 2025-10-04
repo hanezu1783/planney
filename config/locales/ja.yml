@@ -4,18 +4,20 @@ ja:
       transaction: 取引
     attributes:
       transaction:
-        transaction_types:
-          income: "収入"
-          expense: "支出"
         pay_types:
           cash: "現金"
           credit_card: "クレジットカード"
+        transaction_types:
+          expense: "支出"
+          income: "収入"
           e_money: "電子マネー"
           bank_transfer: "銀行振込"
   date:
     formats:
-      default: "%Y/%m/%d"
-      short: "%m/%d"
+      default: "%Y年%m月%d日"
+      short: "%m月%d日"
+      long: "%Y年%m月%d日(%a)"
+
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"

@@ -3,7 +3,14 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show] # :edit, :update, :destroy も今後追加
 
   def index
+    # N+1問題を避けるためにincludes(:category)を追加
     @transactions = current_user.transactions.order(date: :desc)
+
+    # 円グラフ用のデータを作成 (支出のみをカテゴリ別に集計)
+    # ActiveHashのため、joinsやgroupは使わずにRubyで処理する
+    expenses = current_user.transactions.where(transaction_type: :expense)
+    @expense_by_category = expenses.group_by { |t| t.category&.name }
+                                   .transform_values { |transactions| transactions.sum(&:price) }
   end
 
   def new
