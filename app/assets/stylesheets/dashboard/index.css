@@ -98,3 +98,200 @@
 .btn-schedule:hover {
   background-color: #a1bde0; /* content-boxのボーダー色と合わせる */
 }
+
+/* グラフコンテナ */
+.chart-container {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/* --- サマリーリスト共通 --- */
+.summary-list-container {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.summary-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #444;
+}
+
+.summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.summary-label {
+  color: #555;
+}
+
+.summary-amount {
+  font-weight: bold;
+}
+
+.summary-amount.expense {
+  color: #000; 
+}
+
+.recent-transaction .summary-date {
+  color: #888;
+  margin-right: 15px;
+  font-size: 0.9em;
+}
+
+.recent-transaction .summary-label {
+  flex-grow: 1; /* タイトルが残りのスペースを埋めるように */
+}
+
+.recent-transaction .summary-label a {
+  color: #0056b3;
+  text-decoration: none;
+}
+
+.recent-transaction .summary-label a:hover {
+  text-decoration: underline;
+}
+
+/* --- カレンダー --- */
+.calendar-container {
+  padding-top: 10px;
+}
+
+.simple-calendar .table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.simple-calendar th {
+  padding: 8px;
+  text-align: center;
+  font-weight: 600;
+  border-bottom: 2px solid #eee;
+}
+
+.simple-calendar td {
+  width: 14.28%;
+  height: 80px; /* ダッシュボード用に高さを調整 */
+  padding: 4px;
+  border: 1px solid #eee;
+  vertical-align: top;
+}
+
+.simple-calendar .today {
+  background-color: #f7faff;
+}
+
+.simple-calendar .past {
+  background-color: #f9f9f9;
+  color: #aaa;
+}
+
+.simple-calendar .prev-month,
+.simple-calendar .next-month {
+  color: #ccc;
+  background-color: #fafafa;
+}
+
+.calendar-day-number {
+  font-size: 0.85em;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.calendar-event {
+  margin-bottom: 2px;
+  font-size: 0.75em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: #b7cde9;
+  color: white;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.calendar-event-link {
+  color: white;
+  text-decoration: none;
+}
+
+.calendar-event-link:hover {
+  text-decoration: underline;
+}
+
+/* --- 直近のイベントリスト --- */
+.upcoming-events-container {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.upcoming-events-group {
+  margin-bottom: 20px;
+}
+
+.upcoming-events-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.upcoming-events-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.upcoming-event-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.upcoming-event-item:hover {
+  background-color: #f7faff; /* カレンダーの今日の色と合わせる */
+}
+
+.event-item-title a {
+  color: #0056b3;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.event-item-title a:hover {
+  text-decoration: underline;
+}
+
+.event-item-time {
+  font-size: 0.9em;
+  color: #666;
+  white-space: nowrap;
+  margin-left: 15px;
+}
+
+.no-upcoming-events {
+  text-align: center;
+  color: #888;
+  padding: 15px 0;
+}

@@ -1,8 +1,9 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def new
-    @event = Event.new
+    @event = Event.new(all_day: false)
   end
 
   def index
@@ -10,18 +11,39 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
-    # 「終日」が選択された場合の処理
+    @event = current_user.events.new(event_params)
+
+    # all_day の場合、end_at を start_at と同じ日の終わりに設定
     if @event.all_day?
-      # start_atには日付のみが送られてくるため、end_atをその日の終わりに設定する
       @event.end_at = @event.start_at.end_of_day
     end
 
     if @event.save
-      redirect_to root_path, notice: 'スケジュールを登録しました。'
+      redirect_to events_path, notice: 'スケジュールを登録しました。'
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+  end
+
+  def edit
+  end
+
+  def update
+    if @event.update(event_params)
+      # all_day の場合、end_at を start_at と同じ日の終わりに設定
+      @event.update(end_at: @event.start_at.end_of_day) if @event.all_day?
+      redirect_to events_path, notice: 'スケジュールを更新しました。'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @event.destroy
+    redirect_to events_path, notice: 'スケジュールを削除しました。'
   end
 
   private
@@ -29,6 +51,10 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(
       :event_title, :start_at, :end_at, :all_day, :description
-    ).merge(user_id: current_user.id)
+    )
+  end
+
+  def set_event
+    @event = current_user.events.find(params[:id])
   end
 end

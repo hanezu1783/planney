@@ -1,0 +1,8 @@
+<%= stylesheet_link_tag "transactions/new", "data-turbo-track": "reload" %>
+
+<h1>家計簿の編集</h1>
+
+<%# フォームパーシャルを呼び出す %>
+<%= render 'form', transaction: @transaction %>
+
+<%= link_to '一覧に戻る', transactions_path %>

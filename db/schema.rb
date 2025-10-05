@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_28_064438) do
+ActiveRecord::Schema[7.1].define(version: 2025_10_05_053122) do
   create_table "event_transactions", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "event_id", null: false
+    t.bigint "transaction_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_transactions_on_event_id"
+    t.index ["transaction_id"], name: "index_event_transactions_on_transaction_id"
+    t.index ["user_id"], name: "index_event_transactions_on_user_id"
   end
 
   create_table "events", charset: "utf8mb3", force: :cascade do |t|
@@ -55,6 +61,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_28_064438) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "event_transactions", "events"
+  add_foreign_key "event_transactions", "transactions"
+  add_foreign_key "event_transactions", "users"
   add_foreign_key "events", "users"
   add_foreign_key "transactions", "users"
 end

@@ -2,6 +2,6 @@ Rails.application.routes.draw do
   get 'dashboard/index'
   devise_for :users
   root to:"dashboard#index"
-  resources :transactions, except: [:edit, :update, :destroy]
-  resources :events, only: [:new, :create, :index, :show]
+  resources :transactions
+  resources :events
 end

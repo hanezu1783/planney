@@ -1,0 +1,33 @@
+<%= stylesheet_link_tag "transactions/show", "data-turbo-track": "reload" %>
+
+<div class="transaction-show-container">
+  <h1><%= @transaction.title %></h1>
+
+  <div class="transaction-detail-item">
+    <span class="label">日付:</span>
+    <p><%= l(@transaction.date, format: :long) %></p>
+  </div>
+
+  <div class="transaction-detail-item">
+    <span class="label">金額:</span>
+    <p class="amount"><%= number_to_currency(@transaction.price, unit: '円', precision: 0, format: "%n%u") %></p>
+  </div>
+
+  <div class="transaction-detail-item">
+    <span class="label">メモ:</span>
+    <p><%= @transaction.memo.presence || "（メモなし）" %></p>
+  </div>
+
+  <% if @transaction.events.present? %>
+    <div class="related-events">
+      <h3>関連イベント</h3>
+      <ul>
+        <% @transaction.events.each do |event| %>
+          <li><%= link_to event.event_title, event_path(event) %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= link_to '一覧に戻る', transactions_path, class: 'link-back' %>
+</div>

@@ -4,6 +4,10 @@
 <div class="event-index-container">
   <h1>スケジュール</h1>
 
+  <div class="page-actions">
+    <%= link_to 'スケジュールを登録する', new_event_path, class: 'btn-action' %>
+  </div>
+
   <div class="calendar-container">
     <%# simple_calendarでカレンダーを表示します %>
     <%= month_calendar(attribute: :start_at, events: @events) do |date, events| %>
@@ -31,14 +35,40 @@
           <th>タイトル</th>
           <th>開始日時</th>
           <th>終了日時</th>
+          <th>詳細</th>
+          <th>操作</th>
         </tr>
       </thead>
       <tbody>
         <% @events.each do |event| %>
           <tr>
             <td><%= link_to event.event_title, event_path(event) %></td>
-            <td><%= l(event.start_at, format: :default) %></td>
-            <td><%= l(event.end_at, format: :default) %></td>
+      
+            <%# --- 開始日時のフォーマット --- %>
+            <td>
+              <% if event.all_day? %>
+                <%= l(event.start_at, format: :long) %>
+              <% else %>
+                <%= l(event.start_at, format: :long) %> <%= l(event.start_at, format: :short) %>
+              <% end %>
+            </td>
+
+            <%# --- 終了日時のフォーマット（同じ日なら非表示にしてスッキリ） --- %>
+            <td>
+              <% if event.all_day? %>
+                <span class="allday">終日</span>
+              <% elsif event.start_at.to_date == event.end_at.to_date %>
+                <%= l(event.end_at, format: :short) %>
+              <% else %>
+                <%= l(event.end_at, format: :long) %> <%= l(event.end_at, format: :short) %>
+              <% end %>
+            </td>
+
+            <td><%= event.description.presence || "（なし）" %></td>
+            <td class="actions">
+              <%= link_to '編集', edit_event_path(event), class: 'btn-edit' %>
+              <%= link_to '削除', event_path(event), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn-delete' %>
+            </td>
           </tr>
         <% end %>
       </tbody>

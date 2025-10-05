@@ -150,3 +150,76 @@
   margin-top: 20px;
   color: #0056b3;
 }
+
+.btn-action {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  background-color: #b7cde9; /* スケジュールセクションのボーダー色と合わせる */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.btn-action:hover {
+  background-color: #a1bde0;
+}
+
+/* --- 日時フォーマット改善 --- */
+.event-table td .date-text {
+  font-weight: 500;
+  color: #333;
+  margin-right: 6px;
+}
+
+.event-table td .time-range {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.event-table td .time-range::before {
+  content: "⏰ ";
+  font-size: 0.85em;
+  color: #999;
+}
+
+.event-table td .allday {
+  background-color: #eef4ff;
+  color: #0056b3;
+  font-size: 0.85em;
+  padding: 2px 6px;
+  border-radius: 6px;
+  margin-left: 4px;
+}
+
+/* --- 操作ボタン --- */
+.event-table td.actions {
+  white-space: nowrap;
+}
+
+.btn-edit, .btn-delete {
+  display: inline-block;
+  padding: 4px 10px;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 12px;
+  transition: opacity 0.2s ease;
+}
+
+.btn-edit {
+  background-color: #ffe082; /* 柔らかいパステルイエロー */
+  color: #333;
+}
+
+.btn-delete {
+  background-color: #ef9a9a; /* 淡いサーモンレッド */
+  color: #fff;
+}
+
+.btn-edit:hover, .btn-delete:hover {
+  opacity: 0.8;
+}

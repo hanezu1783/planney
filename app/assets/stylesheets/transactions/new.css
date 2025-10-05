@@ -43,6 +43,20 @@ h1 {
   box-sizing: border-box;
 }
 
+/* 複数選択セレクトボックス用のスタイル */
+.field select[multiple] {
+  height: 120px; /* 高さを指定して選択肢を表示できるようにする */
+}
+
+
+/* フォーム内の固定テキスト表示用 */
+.field .form-static-text {
+  padding: 10px 12px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+}
+
 /* ラジオボタンを横並びにするコンテナ */
 .radio-buttons-container {
   display: flex;
