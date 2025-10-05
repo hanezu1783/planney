@@ -1,0 +1,60 @@
+<%= form_with(model: transaction, local: true) do |form| %>
+  <%# エラーメッセージを共通パーシャルで表示 %>
+  <%= render 'shared/error_messages', model: form.object %>
+
+  <%# 支出のみを記録するため、transaction_typeをhidden_fieldで送信、表示は固定 %>
+  <div class="field">
+    <p class="form-label">区分</p>
+    <p class="form-static-text">支出</p>
+    <%= form.hidden_field :transaction_type, value: 'expense' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title, 'タイトル' %>
+    <%= form.text_field :title, placeholder: '例: スーパーでの買い物', required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date, '日付' %>
+    <%# 初期値を今日の日付に設定 %>
+    <%= form.date_field :date, value: form.object.date || Date.today %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price, '金額' %>
+    <%= form.number_field :price, placeholder: '例: 1000', required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category_id, 'カテゴリ' %>
+    <%= form.collection_select :category_id, @categories, :id, :name, { prompt: 'カテゴリを選択' } %>
+  </div>
+
+  <div class="field">
+    <p class="form-label">支払い方法</p>
+    <div class="radio-buttons-container">
+      <% Transaction.pay_types.keys.each do |type| %>
+        <%= form.radio_button :pay_type, type, checked: (form.object.pay_type == type || (form.object.new_record? && type == 'cash')) %>
+        <%= form.label "pay_type_#{type}", I18n.t("activerecord.attributes.transaction.pay_types.#{type}"), class: 'radio-label' %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :memo, 'メモ' %>
+    <%= form.text_field :memo, placeholder: '例: ランチ代' %>
+  </div>
+
+  <%# 編集画面のときのみイベント選択欄を表示する %>
+  <% unless form.object.new_record? %>
+    <div class="field">
+      <%= form.label :event_ids, '関連イベント' %>
+      <%= form.collection_select :event_ids, @events, :id, :event_title, 
+          { prompt: '関連するイベントを選択' }, { multiple: true, class: 'form-select-multiple' } %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

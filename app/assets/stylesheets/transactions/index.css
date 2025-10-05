@@ -1,0 +1,238 @@
+/* 全体コンテナ */
+.transaction-index-container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+  font-family: sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* 月セレクター */
+.month-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 20px;
+}
+
+.current-month {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.month-link {
+  color: #0056b3;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+.month-link:hover {
+  background-color: #e9ecef;
+  text-decoration: none;
+}
+
+/* テーブル上部のアクションボタン */
+.table-actions {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.btn-action {
+  display: inline-block;
+  padding: 10px 18px;
+  background-color: #2e7dff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.btn-action:hover {
+  background-color: #1b5fd8;
+}
+
+/* テーブルのラッパー */
+.table-wrapper {
+  overflow-x: auto; /* スマホ表示で横スクロール可能にする */
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* テーブル本体 */
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transaction-table th,
+.transaction-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  white-space: nowrap; /* 内容が折り返されないようにする */
+}
+
+.transaction-table thead th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #444;
+}
+
+.transaction-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.transaction-table tbody tr:hover {
+  background-color: #f1f3f5;
+}
+
+/* 金額の右寄せ */
+.transaction-table .amount {
+  text-align: right;
+  font-weight: bold;
+}
+
+/* 収入と支出で色分け */
+.transaction-table tr.income .amount {
+  color: #28a745; /* 緑 */
+}
+.transaction-table tr.expense .amount {
+  color: #000; 
+}
+
+.transaction-table .title a {
+  color: #0056b3;
+  text-decoration: none;
+}
+.transaction-table .title a:hover {
+  text-decoration: underline;
+}
+
+/* データがない場合のメッセージ */
+.no-transactions {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+/* 戻るリンク */
+.link-back {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #0056b3;
+}
+
+/* --- 操作ボタン --- */
+.transaction-table td.actions {
+  white-space: nowrap;
+}
+
+.btn-edit, .btn-delete {
+  display: inline-block;
+  padding: 4px 10px;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 12px;
+  transition: opacity 0.2s ease;
+}
+
+.btn-edit {
+  background-color: #ffe082; /* 柔らかいパステルイエロー */
+  color: #333;
+}
+
+.btn-delete {
+  background-color: #ef9a9a; /* 淡いサーモンレッド */
+  color: #fff;
+}
+
+.btn-edit:hover, .btn-delete:hover {
+  opacity: 0.8;
+}
+
+/* --- イベント別支出セクション --- */
+.event-expenses-section {
+  margin: 40px 0;
+  padding-top: 30px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.event-expenses-section h2 {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+
+.event-expense-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.event-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.event-date {
+  font-size: 14px;
+  color: #666;
+}
+
+.event-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.event-title a {
+  color: #333;
+  text-decoration: none;
+}
+
+.expense-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+
+.expense-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 5px;
+}
+
+.expense-amount {
+  font-weight: 500;
+}
+
+.total-amount {
+  text-align: right;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
+}

@@ -1,0 +1,8 @@
+<%= stylesheet_link_tag "events/new", "data-turbo-track": "reload" %>
+
+<h1>スケジュールの編集</h1>
+
+<%# フォームパーシャルを呼び出す %>
+<%= render 'form', event: @event %>
+
+<%= link_to '一覧に戻る', events_path %>

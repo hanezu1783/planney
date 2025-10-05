@@ -1,0 +1,48 @@
+<%# Stimulusコントローラを接続し、各要素にターゲットとアクションを設定 %>
+<%= form_with(model: event, local: true, data: { controller: "event-form" }) do |form| %>
+  <%= render 'shared/error_messages', model: form.object %>
+
+  <div class="field">
+    <%= form.label :event_title, 'タイトル' %>
+    <%= form.text_field :event_title, placeholder: '例: チームミーティング' %>
+  </div>
+
+  <div class="field">
+    <%= form.check_box :all_day, data: { action: "event-form#toggleFields", event_form_target: "allDay" } %>
+    <%= form.label :all_day, '終日' %>
+  </div>
+
+  <%# 時間指定用のフィールド群 %>
+  <div data-event-form-target="timeFields">
+    <div class="field">
+      <%= form.label :start_at, '開始日時' %>
+      <%= form.datetime_local_field :start_at,
+            value: form.object.start_at&.strftime("%Y-%m-%dT%H:%M"),
+            data: { action: "input->event-form#updateHiddenFields", event_form_target: "startDatetime" } %>
+    </div>
+    <div class="field">
+      <%= form.label :end_at, '終了日時' %>
+      <%= form.datetime_local_field :end_at,
+            value: form.object.end_at&.strftime("%Y-%m-%dT%H:%M"),
+            data: { action: "input->event-form#updateHiddenFields", event_form_target: "endDatetime" } %>
+    </div>
+  </div>
+
+  <%# 終日用の日付フィールド %>
+  <div data-event-form-target="dateFields">
+    <div class="field">
+      <%= form.label :start_at, '日付' %>
+      <%= form.date_field :start_at,
+            value: form.object.start_at&.to_date || Date.today,
+            data: { action: "input->event-form#updateHiddenFields", event_form_target: "startDate" } %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :description, '詳細' %>
+    <%= form.text_area :description, rows: 4, placeholder: '例: プロジェクトAの進捗確認' %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

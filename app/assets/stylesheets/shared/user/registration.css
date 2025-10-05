@@ -1,0 +1,110 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+}
+
+.form-wrap {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 480px;
+}
+
+/* フォームヘッダー */
+.form-header-text {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #333;
+}
+
+/* 各フォームグループ */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-text-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.form-text {
+  font-weight: 500;
+  color: #555;
+}
+
+.indispensable {
+  color: #e74c3c;
+  font-size: 14px;
+}
+
+/* 入力欄 */
+.input-default {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-default:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 2px rgba(231,76,60,0.2);
+}
+
+/* 補助テキスト */
+.info-text {
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+
+/* 登録ボタン */
+.register-btn {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.register-red-btn {
+  background-color: #e74c3c;
+  color: #fff;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.register-red-btn:hover {
+  background-color: #c0392b;
+}
+
+/* リンク集 */
+.devise-links {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.devise-links a {
+  color: #e74c3c;
+  text-decoration: none;
+  margin: 0 8px;
+}
+
+.devise-links a:hover {
+  text-decoration: underline;
+}

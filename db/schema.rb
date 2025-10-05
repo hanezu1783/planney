@@ -10,15 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_08_194506) do
-  create_table "transactions", charset: "utf8mb3", force: :cascade do |t|
+ActiveRecord::Schema[7.1].define(version: 2025_10_05_053122) do
+  create_table "event_transactions", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "event_id", null: false
+    t.bigint "transaction_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_transactions_on_event_id"
+    t.index ["transaction_id"], name: "index_event_transactions_on_transaction_id"
+    t.index ["user_id"], name: "index_event_transactions_on_user_id"
+  end
+
+  create_table "events", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "event_title", null: false
+    t.datetime "start_at", null: false
+    t.datetime "end_at", null: false
+    t.boolean "all_day", default: false, null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "transactions", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title", null: false
+    t.integer "price", null: false
+    t.date "date", null: false
+    t.integer "transaction_type"
+    t.integer "category_id", null: false
+    t.integer "pay_type"
+    t.text "memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "nickname", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -28,4 +61,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_08_194506) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "event_transactions", "events"
+  add_foreign_key "event_transactions", "transactions"
+  add_foreign_key "event_transactions", "users"
+  add_foreign_key "events", "users"
+  add_foreign_key "transactions", "users"
 end

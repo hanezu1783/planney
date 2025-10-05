@@ -1,0 +1,41 @@
+<%= stylesheet_link_tag "events/show", "data-turbo-track": "reload" %>
+
+<div class="event-show-container">
+  <h1><%= @event.event_title %></h1>
+
+  <div class="event-detail-item">
+    <span class="label">日時:</span>
+    <p>
+      <% if @event.all_day? %>
+        <%= l(@event.start_at, format: :long) %> (終日)
+      <% else %>
+        <%= l(@event.start_at, format: :long) %> <%= l(@event.start_at, format: :short) %> 〜 <%= l(@event.end_at, format: :short) %>
+      <% end %>
+    </p>
+  </div>
+
+  <div class="event-detail-item">
+    <span class="label">詳細:</span>
+    <p><%= simple_format(@event.description.presence || "（詳細なし）") %></p>
+  </div>
+
+  <% if @event.transactions.present? %>
+    <div class="related-transactions">
+      <h3>関連する支出</h3>
+      <ul>
+        <% @event.transactions.order(date: :asc).each do |transaction| %>
+          <li>
+            <%= link_to transaction.title, transaction_path(transaction) %>
+            <span class="amount"><%= number_to_currency(transaction.price, unit: '円', precision: 0, format: "%n%u") %></span>
+          </li>
+        <% end %>
+      </ul>
+      <div class="total-amount">
+        <strong>合計支出: </strong>
+        <%= number_to_currency(@event.transactions.sum(:price), unit: '円', precision: 0, format: "%n%u") %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= link_to '一覧に戻る', events_path, class: 'link-back' %>
+</div>

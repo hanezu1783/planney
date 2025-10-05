@@ -1,1 +1,89 @@
-<h1>トップページ</h1>
+<%= stylesheet_link_tag "transactions/index", "data-turbo-track": "reload" %>
+
+
+<div class="transaction-index-container">
+  <h1>家計簿一覧</h1>
+
+  <div class="month-selector">
+    <%= link_to "‹ 前月", transactions_path(month: @date.prev_month.strftime("%Y-%m")), class: "month-link" %>
+    <span class="current-month"><%= @date.strftime("%Y年%m月") %></span>
+    <%= link_to "次月 ›", transactions_path(month: @date.next_month.strftime("%Y-%m")), class: "month-link" %>
+  </div>
+
+  <div class="table-actions">
+    <%= link_to '新しく記録する', new_transaction_path, class: 'btn-action' %>
+  </div>
+
+  <% if @expense_by_category.present? %>
+    <div class="chart-container" style="margin-bottom: 2rem;">
+      <h2>支出の割合</h2>
+      <%= pie_chart @expense_by_category, donut: true, legend: "bottom", colors: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40"] %>
+    </div>
+  <% end %>
+
+  <% if @transactions.present? %>
+    <div class="table-wrapper">
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>日付</th>
+            <th>タイトル</th>
+            <th>区分</th>
+            <th>カテゴリ</th>
+            <th class="amount">金額</th>
+            <th>支払い方法</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @transactions.each do |transaction| %>
+            <tr class="<%= transaction.transaction_type %>">
+              <td><%= l(transaction.date, format: :short) %></td>
+              <td class="title"><%= link_to transaction.title, transaction_path(transaction) %></td>
+              <td><%= transaction.transaction_type_text %></td>
+              <td><%= transaction.category&.name %></td>
+              <td class="amount">
+                <%= number_to_currency(transaction.price, unit: '円', precision: 0, format: "%n%u") %>
+              </td>
+              <td><%= transaction.pay_type_text %></td>
+              <td class="actions">
+                <%= link_to '編集', edit_transaction_path(transaction), class: 'btn-edit' %>
+                <%= link_to '削除', transaction_path(transaction), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn-delete' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p class="no-transactions">まだ取引履歴がありません。最初の記録をしてみましょう！</p>
+  <% end %>
+
+  <%# --- イベント別支出セクション --- %>
+  <% if @events_with_expenses.any? { |event| event.transactions.present? } %>
+    <div class="event-expenses-section">
+      <h2>イベント別支出</h2>
+      <% @events_with_expenses.each do |event| %>
+        <% if event.transactions.present? %>
+          <div class="event-expense-card">
+            <div class="event-header">
+              <span class="event-date"><%= l(event.start_at.to_date, format: :short) %></span>
+              <h3 class="event-title"><%= link_to event.event_title, event_path(event) %></h3>
+            </div>
+            <ul class="expense-list">
+              <% event.transactions.each do |transaction| %>
+                <li class="expense-item">
+                  <span class="expense-title"><%= link_to transaction.title, transaction_path(transaction) %></span>
+                  <span class="expense-amount"><%= number_to_currency(transaction.price, unit: '円', precision: 0, format: "%n%u") %></span>
+                </li>
+              <% end %>
+            </ul>
+            <div class="total-amount">合計: <%= number_to_currency(event.transactions.sum(:price), unit: '円', precision: 0, format: "%n%u") %></div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= link_to 'ダッシュボードに戻る', root_path, class: 'link-back' %>
+</div>
