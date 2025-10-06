@@ -50,6 +50,8 @@ test:
 #
 production:
   <<: *default
+  adapter: mysql2
   database: planney_production
-  username: planney
+  username: root
   password: <%= ENV["PLANNEY_DATABASE_PASSWORD"] %>
+  socket: /var/lib/mysql/mysql.sock
