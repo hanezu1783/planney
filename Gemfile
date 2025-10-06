@@ -72,3 +72,6 @@ gem 'devise'
 gem 'active_hash'
 gem 'simple_calendar'
 gem "chartkick"
+group :production do
+  gem 'unicorn', '6.1.0'
+end
